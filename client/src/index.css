@@ -42,7 +42,11 @@ a:hover {
 button {
   border: none;
   outline: none;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
   color: white;
   padding: 11px 16px;
   border-radius: 10px;
@@ -279,6 +283,134 @@ label {
   }
 
   button {
+    width: 100%;
+  }
+}
+
+/* =========================
+   GROUP DETAILS PAGE ONLY
+   ========================= */
+
+.group-details-page {
+  max-width: 1240px;
+}
+
+.group-details-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.group-main {
+  flex: 1.65;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.group-sidebar {
+  flex: 1;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* summary card */
+.group-summary-card {
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.group-summary-card h2 {
+  margin-bottom: 8px;
+}
+
+.group-summary-card p + p {
+  margin-top: 4px;
+}
+
+/* expenses + balances */
+.expense-card {
+  min-height: 180px;
+}
+
+.balance-card {
+  min-height: 140px;
+}
+
+/* sidebar cards */
+.sidebar-card .form,
+.sidebar-card .form-inline {
+  max-width: 100%;
+}
+
+/* add member card */
+.add-member-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.add-member-section {
+  padding: 20px;
+}
+
+.add-member-section h3 {
+  margin-bottom: 14px;
+}
+
+.add-member-section input {
+  margin-bottom: 14px;
+}
+
+.user-scroll-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-scroll-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.user-scroll-list::-webkit-scrollbar-thumb {
+  background: #cfd8e8;
+  border-radius: 20px;
+}
+
+.add-user-item {
+  align-items: center;
+}
+
+.add-user-item button {
+  min-width: 72px;
+  padding: 10px 14px;
+}
+
+.member-state {
+  margin-top: 10px;
+  color: var(--text-light);
+}
+
+/* better spacing inside cards */
+.card h3 {
+  margin-bottom: 12px;
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .group-details-layout {
+    flex-direction: column;
+  }
+
+  .group-sidebar {
+    min-width: 100%;
     width: 100%;
   }
 }

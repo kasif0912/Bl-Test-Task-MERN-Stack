@@ -10,7 +10,6 @@ function AddMemberSection({ groupId, onMemberAdded }) {
   const fetchUsers = async (value = "") => {
     try {
       setLoading(true);
-
       const res = await api.get(`/user?groupId=${groupId}&search=${value}`);
       setUsers(res.data.users || []);
     } catch (error) {
@@ -31,7 +30,7 @@ function AddMemberSection({ groupId, onMemberAdded }) {
       fetchUsers(search);
       onMemberAdded();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to add memeber");
+      toast.error(error.response?.data?.message || "Failed to add member");
     }
   };
 
@@ -42,7 +41,7 @@ function AddMemberSection({ groupId, onMemberAdded }) {
   };
 
   return (
-    <div className="card">
+    <div className="add-member-section">
       <h3>Add Existing Users</h3>
 
       <input
@@ -53,13 +52,13 @@ function AddMemberSection({ groupId, onMemberAdded }) {
       />
 
       {loading ? (
-        <p>Loading users...</p>
+        <p className="member-state">Loading users...</p>
       ) : users.length === 0 ? (
-        <p>No users available</p>
+        <p className="member-state">No users available</p>
       ) : (
-        <div className="list">
+        <div className="user-scroll-list">
           {users.map((user) => (
-            <div key={user._id} className="list-item">
+            <div key={user._id} className="list-item add-user-item">
               <div>
                 <strong>{user.name}</strong>
                 <p>{user.email}</p>

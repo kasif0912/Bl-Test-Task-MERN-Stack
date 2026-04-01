@@ -61,33 +61,56 @@ function GroupDetails() {
     <div>
       <Navbar />
 
-      <div className="container">
-        <div className="card">
-          <h2>{group.name}</h2>
-          <p>Group Code: {group.groupCode}</p>
-          <p>Members: {group.members.length}</p>
-        </div>
+      <div className="container group-details-page">
+        <div className="group-details-layout">
+          <div className="group-main">
+            <div className="card group-summary-card">
+              <h2>{group.name}</h2>
+              <p>Group Code: {group.groupCode}</p>
+              <p>Members: {group.members.length}</p>
+            </div>
 
-        <div className="card">
-          <h3>Members</h3>
-          <div className="list">
-            {group.members.map((member) => (
-              <div key={member.user._id} className="list-item">
-                <div>
-                  <strong>{member.user.name}</strong>
-                  <p>{member.user.email}</p>
-                </div>
-                <span>{member.memberCode}</span>
+            <div className="card">
+              <h3>Members</h3>
+              <div className="list">
+                {group.members.map((member) => (
+                  <div key={member.user._id} className="list-item">
+                    <div>
+                      <strong>{member.user.name}</strong>
+                      <p>{member.user.email}</p>
+                    </div>
+                    <span>{member.memberCode}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="card expense-card">
+              <ExpenseList expenses={expenses} />
+            </div>
+
+            <div className="card balance-card">
+              <BalanceList balances={balances} />
+            </div>
+          </div>
+
+          <div className="group-sidebar">
+            <div className="card add-member-card">
+              <AddMemberSection
+                groupId={groupId}
+                onMemberAdded={fetchAllData}
+              />
+            </div>
+
+            <div className="card sidebar-card">
+              <InviteMemberForm groupId={groupId} />
+            </div>
+
+            <div className="card sidebar-card">
+              <ExpenseForm group={group} onExpenseCreated={fetchAllData} />
+            </div>
           </div>
         </div>
-
-        <AddMemberSection groupId={groupId} onMemberAdded={fetchAllData} />
-        <InviteMemberForm groupId={groupId} />
-        <ExpenseForm group={group} onExpenseCreated={fetchAllData} />
-        <ExpenseList expenses={expenses} />
-        <BalanceList balances={balances} />
       </div>
     </div>
   );
