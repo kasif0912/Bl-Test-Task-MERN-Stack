@@ -263,7 +263,7 @@ export const inviteMember = async (req, res) => {
       expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     });
 
-    const inviteLink = `http://localhost:5173/signup?inviteToken=${token}`;
+    const inviteLink = `https://jade-dolphin-f29338.netlify.app/signup?inviteToken=${token}`;
 
     await sendInviteEmail(normalizedEmail, inviteLink);
 
