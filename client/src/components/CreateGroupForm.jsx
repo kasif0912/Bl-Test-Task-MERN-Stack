@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import { toast } from "react-hot-toast";
 
 function CreateGroupForm({ onGroupCreated }) {
   const [name, setName] = useState("");
@@ -9,19 +10,21 @@ function CreateGroupForm({ onGroupCreated }) {
     e.preventDefault();
 
     if (!name.trim()) {
-      return alert("Group name is required");
+      return toast.error("Grupp name is required");
     }
 
     try {
       setLoading(true);
 
       const res = await api.post("/groups/create", { name });
-      console.log(res.data);
-
+      // console.log(res.data);
+      if (res.data) {
+        toast.success("created successfully");
+      }
       setName("");
       onGroupCreated(res.data.group);
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to create group");
+      toast.error(error.response?.data?.message || "Failed to create Gorup");
     } finally {
       setLoading(false);
     }

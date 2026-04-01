@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import { toast } from "react-hot-toast";
 
 function InviteMemberForm({ groupId }) {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ function InviteMemberForm({ groupId }) {
     e.preventDefault();
 
     if (!email.trim()) {
-      return alert("Email is required");
+      return toast.error(error.response?.data?.message || "Email is required");
     }
 
     try {
@@ -17,10 +18,10 @@ function InviteMemberForm({ groupId }) {
 
       const res = await api.post(`/groups/${groupId}/invite`, { email });
 
-      alert(res.data.message || "Invite sent");
+      toast.success(res.data.message || "Invite sent");
       setEmail("");
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to invite member");
+      toast.error(error.response?.data?.message || "Failed to invite member ❌");
     } finally {
       setLoading(false);
     }

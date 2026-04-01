@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { toast } from "react-hot-toast";
 
 function AddMemberSection({ groupId, onMemberAdded }) {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ function AddMemberSection({ groupId, onMemberAdded }) {
       const res = await api.get(`/user?groupId=${groupId}&search=${value}`);
       setUsers(res.data.users || []);
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to fetch users");
+      toast.error(error.response?.data?.message || "Failed to fetch users");
     } finally {
       setLoading(false);
     }
@@ -26,11 +27,11 @@ function AddMemberSection({ groupId, onMemberAdded }) {
   const handleAddMember = async (email) => {
     try {
       await api.post(`/groups/${groupId}/add-member`, { email });
-      alert("Member added successfully");
+      toast.success("Member added successfully");
       fetchUsers(search);
       onMemberAdded();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to add member");
+      toast.error(error.response?.data?.message || "Failed to add memeber");
     }
   };
 

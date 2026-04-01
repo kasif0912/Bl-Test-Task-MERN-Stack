@@ -7,6 +7,7 @@ import InviteMemberForm from "../components/InviteMemberForm";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import BalanceList from "../components/BalanceList";
+import { toast } from "react-hot-toast";
 
 function GroupDetails() {
   const { groupId } = useParams();
@@ -36,7 +37,9 @@ function GroupDetails() {
       setLoading(true);
       await Promise.all([fetchGroup(), fetchExpenses(), fetchBalances()]);
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to load group details");
+      toast.error(
+        error.response?.data?.message || "Failed to load group details ❌"
+      );
     } finally {
       setLoading(false);
     }

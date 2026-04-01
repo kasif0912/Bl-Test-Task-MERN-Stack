@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import api from "../api/axios";
+import { toast } from "react-hot-toast";
 
 function Signup() {
   const navigate = useNavigate();
@@ -40,9 +41,11 @@ function Signup() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
+      toast.success("Signup successful");
+
       navigate("/dashboard");
     } catch (error) {
-      alert(error.response?.data?.message || "Signup failed");
+      toast.error(error.response?.data?.message || "Signup failed ❌");
     } finally {
       setLoading(false);
     }

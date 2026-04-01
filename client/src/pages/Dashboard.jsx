@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import Navbar from "../components/Navbar";
 import CreateGroupForm from "../components/CreateGroupForm";
+import { toast } from "react-hot-toast";
 
 function Dashboard() {
   const [groups, setGroups] = useState([]);
@@ -16,7 +17,7 @@ function Dashboard() {
       const res = await api.get("/groups/my-groups");
       setGroups(res.data.groups || []);
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to fetch groups");
+      toast.error(error.response?.data?.message || "Failed to fetch Groups");
     } finally {
       setLoading(false);
     }

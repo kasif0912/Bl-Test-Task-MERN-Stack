@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import { toast } from "react-hot-toast";
 
 function ExpenseForm({ group, onExpenseCreated }) {
   const [title, setTitle] = useState("");
@@ -21,7 +22,7 @@ function ExpenseForm({ group, onExpenseCreated }) {
     e.preventDefault();
 
     if (!title || !amount || !paidBy || selectedMembers.length === 0) {
-      return alert("Please fill all required fields");
+      return toast.error("Please fill all required fields");
     }
 
     try {
@@ -42,10 +43,10 @@ function ExpenseForm({ group, onExpenseCreated }) {
       setPaidBy("");
       setSelectedMembers([]);
 
-      alert("Expense added successfully");
+      toast.success("Expense added successfully");
       onExpenseCreated();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to add expense");
+      toast.error(error.response?.data?.message || "Failed to add expense");
     } finally {
       setLoading(false);
     }
