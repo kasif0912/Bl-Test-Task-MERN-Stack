@@ -243,7 +243,6 @@ input::placeholder {
   display: inline-block;
 }
 
-/* Nice text defaults inside cards/items */
 h1,
 h2,
 h3,
@@ -287,9 +286,6 @@ label {
   }
 }
 
-/* =========================
-   GROUP DETAILS PAGE ONLY
-   ========================= */
 
 .group-details-page {
   max-width: 1240px;
